@@ -12,9 +12,9 @@
   roles:
     - docker
 
-- name: Install analyzer
+- name: Install shop
   hosts: api
   become: yes
   gather_facts: no
   roles:
-    - analyzer
+    - shop

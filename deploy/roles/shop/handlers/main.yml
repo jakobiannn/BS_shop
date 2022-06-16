@@ -1,0 +1,6 @@
+---
+
+- name: restart shop
+  service:
+      name: docker-compose@shop
+      state: restarted

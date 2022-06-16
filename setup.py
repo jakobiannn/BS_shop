@@ -5,7 +5,7 @@ from pkg_resources import parse_requirements
 from setuptools import find_packages, setup
 
 
-module_name = 'analyzer'
+module_name = 'shop'
 
 # Модуль может быть еще не установлен (или установлена другая версия), поэтому
 # необходимо загружать __init__.py с помощью machinery.
@@ -30,7 +30,6 @@ setup(
     version=module.__version__,
     author=module.__author__,
     author_email=module.__email__,
-    license=module.__license__,
     description=module.__doc__,
     long_description=open('README.rst').read(),
     url='https://github.com/alvassin/backendschool2019',
@@ -58,7 +57,7 @@ setup(
             # ранних версий python, не стоит лишать пользователей этой
             # возможности.
             '{0}-api = {0}.api.__main__:main'.format(module_name),
-            '{0}-db = {0}.db.__main__:main'.format(module_name)
+            '{0}-db = {0}.db.__main__:main'.format(module_name),
         ]
     },
     include_package_data=True

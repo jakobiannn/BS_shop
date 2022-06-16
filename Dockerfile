@@ -26,7 +26,7 @@ COPY --from=builder /usr/share/python3/app /usr/share/python3/app
 
 # Устанавливаем ссылки, чтобы можно было воспользоваться командами
 # приложения
-RUN ln -snf /usr/share/python3/app/bin/analyzer-* /usr/local/bin/
+RUN ln -snf /usr/share/python3/app/bin/shop-* /usr/local/bin/
 
 # Устанавливаем выполняемую при запуске контейнера команду по умолчанию
-CMD ["analyzer-api"]
+CMD ["shop-api"]

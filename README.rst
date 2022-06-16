@@ -84,8 +84,8 @@ deploy/hosts.ini (с установленной Ubuntu) и выполните к
     make devenv
     make postgres
     source env/bin/activate
-    analyzer-db upgrade head
-    analyzer-api
+    shop-db upgrade head
+    shop-api
 
 После запуска команд приложение начнет слушать запросы на 0.0.0.0:8081.
 Для отладки в PyCharm необходимо запустить :shell:`env/bin/analyzer-api`.

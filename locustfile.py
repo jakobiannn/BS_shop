@@ -4,10 +4,10 @@ from http import HTTPStatus
 from locust import HttpLocust, TaskSet, constant, task
 from locust.exception import RescheduleTask
 
-from analyzer.api.handlers import (
+from shop.api.handlers import (
     CitizenBirthdaysView, CitizensView, CitizenView, TownAgeStatView,
 )
-from analyzer.utils.testing import generate_citizen, generate_citizens, url_for
+from shop.utils.testing import generate_citizen, generate_citizens, url_for
 
 
 class AnalyzerTaskSet(TaskSet):
@@ -27,7 +27,7 @@ class AnalyzerTaskSet(TaskSet):
             *generate_citizens(citizens_num=9998, relations_num=1000,
                                start_citizen_id=3)
         ]
-        return {citizen['citizen_id']: citizen for citizen in citizens}
+        return {citizen['unit_id']: citizen for citizen in citizens}
 
     def request(self, method, path, expected_status, **kwargs):
         with self.client.request(
@@ -58,7 +58,7 @@ class AnalyzerTaskSet(TaskSet):
     def update_citizen(self, import_id):
         url = url_for(CitizenView.URL_PATH, import_id=import_id, citizen_id=1)
         self.request('PATCH', url, HTTPStatus.OK,
-                     name='/imports/{import_id}/citizens/{citizen_id}',
+                     name='/imports/{import_id}/citizens/{unit_id}',
                      json={'relatives': [i for i in range(3, 10)]})
 
     def get_birthdays(self, import_id):

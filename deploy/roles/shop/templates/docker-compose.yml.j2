@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  postgres:
+    restart: always
+    image: postgres:12
+    environment:
+      POSTGRES_USER: {{ shop_pg_user }}
+      POSTGRES_PASSWORD: {{ shop_pg_password }}
+      POSTGRES_DB: {{ shop_pg_dbname }}
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+
+  shop:
+    restart: always
+    image: {{ shop_image }}
+    command: shop-api
+    ports:
+      - 80:8081
+    environment:
+      shop_PG_URL: postgresql://{{ shop_pg_user }}:{{ shop_pg_password }}@postgres/{{ shop_pg_dbname }}

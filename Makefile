@@ -1,6 +1,6 @@
 PROJECT_NAME ?= backendschool2019
 VERSION = $(shell python3 setup.py --version | tr '+' '-')
-PROJECT_NAMESPACE ?= alvassin
+PROJECT_NAMESPACE ?= jakobiannn
 REGISTRY_IMAGE ?= $(PROJECT_NAMESPACE)/$(PROJECT_NAME)
 
 all:
@@ -30,15 +30,15 @@ lint:
 	env/bin/pylama
 
 postgres:
-	docker stop analyzer-postgres || true
-	docker run --rm --detach --name=analyzer-postgres \
+	docker stop shop-postgres || true
+	docker run --rm --detach --name=shop-postgres \
 		--env POSTGRES_USER=user \
 		--env POSTGRES_PASSWORD=hackme \
-		--env POSTGRES_DB=analyzer \
+		--env POSTGRES_DB=shop \
 		--publish 5432:5432 postgres
 
 test: lint postgres
-	env/bin/pytest -vv --cov=analyzer --cov-report=term-missing tests
+	env/bin/pytest -vv --cov=shop --cov-report=term-missing tests
 
 sdist: clean
 	# официальный способ дистрибуции python-модулей

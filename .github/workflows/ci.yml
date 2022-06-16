@@ -18,16 +18,16 @@ jobs:
         env:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: hackme
-          POSTGRES_DB: analyzer
+          POSTGRES_DB: shop
 
     steps:
       - uses: actions/checkout@v2
       - name: test
         uses: docker://snakepacker/python:all
         env:
-          CI_ANALYZER_PG_URL: postgresql://user:hackme@postgres/analyzer
+          CI_SHOP_PG_URL: postgresql://user:hackme@postgres/shop
         with:
-          args: /bin/bash -c "pip install -U '.[dev]' && pylama && wait-for-port postgres:5432 && pytest -vv --cov=analyzer --cov-report=term-missing tests"
+          args: /bin/bash -c "pip install -U '.[dev]' && pylama && wait-for-port postgres:5432 && pytest -vv --cov=shop --cov-report=term-missing tests"
 
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
